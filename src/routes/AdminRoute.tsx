@@ -28,6 +28,7 @@ const AddTax = lazy(() => import("../components/settings/AddTax"));
 const EditTax = lazy(() => import("../components/settings/EditTax"))
 
 const Upload = lazy(() => import("../components/upload/Upload"));
+import { ModalProvider } from '../components/ModalContext';
 
 const AdminRoute: React.FC = () => {
   return (
@@ -37,7 +38,9 @@ const AdminRoute: React.FC = () => {
         <Route index element={<Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>} />
         <Route path="upload" element={<Suspense fallback={<div>Loading...</div>}><Upload /></Suspense>} />
        
-        <Route path="channels" element={<Suspense fallback={<div>Loading...</div>}><Channel /></Suspense>} />
+        <Route path="channels" element={<Suspense fallback={<div>Loading...</div>}> <ModalProvider>
+        <Channel />
+       </ModalProvider></Suspense>} />
         <Route path="channels/add-channel" element={<Suspense fallback={<div>Loading...</div>}><AddChannel /></Suspense>} />
         <Route path="channels/edit-channel/:id" element={<Suspense fallback={<div>Loading...</div>}><EditChannel /></Suspense>} />
 
