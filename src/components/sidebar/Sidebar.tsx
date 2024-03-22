@@ -2,6 +2,8 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/app/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
+
 import {
   // faEnvelope,
   faNewspaper,
@@ -14,15 +16,25 @@ import {
   faGear,
   faCloudArrowUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleSideBar } from "../../redux/features/reducer/sidebarSlice";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const SiderBarDisplay = useSelector((state: RootState) => state.SideBar.show);
+
+  const handleSideBar = () => {
+    dispatch(toggleSideBar());
+  };
+
   return (
     <>
       <div
-        className={`antialiased ${SiderBarDisplay ? "" : "hidden"} md:block`}
+        className={antialiased ${SiderBarDisplay ? "" : "hidden"} md:block}
       >
         {/* <div className="antialiased bg-gray-50 hidden md:block"> */}
         <aside
@@ -61,13 +73,17 @@ const Sidebar = () => {
             </form> */}
             <ul className="space-y-2">
               <li>
-                <Link
-                  to="/"
-                  className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
+                <button
+                  // to="/"
+                  onClick={() => {
+                    navigate("/");
+                    handleSideBar();
+                  }}
+                  className="w-full flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
                 >
                   <svg
                     aria-hidden="true"
-                    className="w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+                    className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 "
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -75,29 +91,37 @@ const Sidebar = () => {
                     <FontAwesomeIcon icon={faNewspaper as IconProp} />
                   </svg>
                   <span className="ml-3">Dashboard</span>
-                </Link>
+                </button>
               </li>
               <li>
-                <Link
-                  to="/upload"
-                  className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
+                <button
+                  // to="/upload"
+                  onClick={() => {
+                    navigate("/upload");
+                    handleSideBar();
+                  }}
+                  className="w-full flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
                 >
                   <svg
                     aria-hidden="true"
-                    className="w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+                    className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 "
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <FontAwesomeIcon icon={faCloudArrowUp as IconProp} />
                   </svg>
-                  <span className="ml-3">Upload csv</span>
-                </Link>
+                  <span className="ml-3 ">Upload csv</span>
+                </button>
               </li>
               <li>
-                <Link
-                  to="/channels"
-                  className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
+                <button
+                  // to="/channels"
+                  onClick={() => {
+                    navigate("/channels");
+                    handleSideBar();
+                  }}
+                  className="w-full flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
                 >
                   <svg
                     aria-hidden="true"
@@ -108,15 +132,17 @@ const Sidebar = () => {
                   >
                     <FontAwesomeIcon icon={faUserGroup as IconProp} />
                   </svg>
-                  <span className="flex-1 ml-3 whitespace-nowrap">
-                    Channels
-                  </span>
-                </Link>
+                  <span className="ml-3">Channels</span>
+                </button>
               </li>
               <li>
-                <Link
-                  to="/invoice"
-                  className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
+                <button
+                  // to="/invoice"
+                  onClick={() => {
+                    navigate("/invoice");
+                    handleSideBar();
+                  }}
+                  className="w-full flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
                 >
                   <svg
                     aria-hidden="true"
@@ -128,16 +154,20 @@ const Sidebar = () => {
                     {/* <FontAwesomeIcon icon={faEnvelope as IconProp} /> */}
                     <FontAwesomeIcon icon={faFileLines as IconProp} />
                   </svg>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Invoice</span>
+                  <span className="ml-3">Invoice</span>
                   {/* <span className="inline-flex justify-center items-center w-5 h-5 text-xs font-semibold rounded-full text-primary-800 bg-primary-100 ">
                     15
                   </span> */}
-                </Link>
+                </button>
               </li>
               <li>
-                <Link
-                  to="/payment"
-                  className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
+                <button
+                  // to="/payment"
+                  onClick={() => {
+                    navigate("/payment");
+                    handleSideBar();
+                  }}
+                  className="w-full flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
                 >
                   <svg
                     aria-hidden="true"
@@ -149,13 +179,17 @@ const Sidebar = () => {
                     {/* <FontAwesomeIcon icon={faBell as IconProp} /> */}
                     <FontAwesomeIcon icon={faMoneyCheckDollar as IconProp} />
                   </svg>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Payment</span>
-                </Link>
+                  <span className="ml-3">Payment</span>
+                </button>
               </li>
               <li>
-                <Link
-                  to="/report"
-                  className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
+                <button
+                  // to="/report"
+                  onClick={() => {
+                    navigate("/report");
+                    handleSideBar();
+                  }}
+                  className="w-full flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
                 >
                   <svg
                     aria-hidden="true"
@@ -167,13 +201,17 @@ const Sidebar = () => {
                     {/* <FontAwesomeIcon icon={faUser as IconProp} /> */}
                     <FontAwesomeIcon icon={faPaste as IconProp} />
                   </svg>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Reports</span>
-                </Link>
+                  <span className="ml-3">Reports</span>
+                </button>
               </li>
               <li>
-                <Link
-                  to="/settings"
-                  className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
+                <button
+                  // to="/settings"
+                  onClick={() => {
+                    navigate("/settings");
+                    handleSideBar();
+                  }}
+                  className="w-full flex items-center p-2 text-base font-medium text-gray-900 rounded-lg  hover:bg-gray-100  group"
                 >
                   <svg
                     aria-hidden="true"
@@ -185,10 +223,8 @@ const Sidebar = () => {
                     {/* <FontAwesomeIcon icon={faUser as IconProp} /> */}
                     <FontAwesomeIcon icon={faGear as IconProp} />
                   </svg>
-                  <span className="flex-1 ml-3 whitespace-nowrap">
-                    Settings
-                  </span>
-                </Link>
+                  <span className="ml-3">Settings</span>
+                </button>
               </li>
             </ul>
             <ul className="pt-5 mt-5 space-y-2 border-t border-gray-200 "></ul>

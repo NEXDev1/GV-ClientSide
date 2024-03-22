@@ -8,6 +8,7 @@ interface Channel {
   channelName: any;
   _id: string;
   name: string;
+  logo: string;
   email: string;
   commission: number;
 }
@@ -37,11 +38,23 @@ const ChannelList = () => {
   console.log(channels);
 
   const columns: TableColumn<Channel>[] = [
+    { name: "Index", selector: (_row: any, index: any) => index + 1 },
     {
-      name: "Index",
-      selector: (_row: any, index: any) => index + 1,
-      width: "100px",
-    },
+      name: "Logo",
+      cell: (row: Channel) => (
+        <img
+          src={row.logo}
+          alt={row.name}
+          // style={{ width: "50px", height: "auto" }}
+          style={{
+            width: "40px",
+            height: "auto",
+            borderRadius: "50%",
+            marginRight: "10px",
+          }}
+        />
+      ),
+   },
     { name: "Name", selector: (row: { name: any }) => row.name },
     { name: "E-mail", selector: (row: { email: any }) => row.email },
     {
@@ -80,15 +93,16 @@ const ChannelList = () => {
     _id: channel._id,
     index: index + 1,
     name: channel.channelName,
+    logo: channel.logo,
+    channelName: channel.channelName,
     email: channel.email,
     commission: channel.commission,
-    channelName: channel.channelName,
   }));
 
   const handleEdit = (row: Channel) => {
     // Handle edit action
     console.log("Edit row:", row);
-    navigate(`/channels/edit-channel/${row._id}`);
+    navigate(/channels/edit-channel/${row._id});
   };
 
   const handleDelete = async (row: Channel) => {
@@ -97,7 +111,7 @@ const ChannelList = () => {
     try {
       const config = {
         method: "delete",
-        url: `admin/channel/${row._id}`,
+        url: admin/channel/${row._id},
         // data: row._id,
       };
 
@@ -113,13 +127,13 @@ const ChannelList = () => {
   };
 
   const generateInvoice = async (row: Channel) => {
-    // navigate(`/invoice`);
-    // navigate(`/invoice/${row._id}`);
+    // navigate(/invoice);
+    // navigate(/invoice/${row._id});
     openModal();
     try {
       const config = {
         method: "get",
-        url: `admin/invoice/${row._id}`,
+        url: admin/invoice/${row._id},
         // data: row._id,
       };
       const response: any = await axiosRequest(config);
